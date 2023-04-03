@@ -1,0 +1,61 @@
+code,day,night,icon;;;;;;;;;;imageName;weatherName;keyword
+1000,Sunny,Clear,113;;;;;;;;;;partlyCloudy;Partly cloudy;Partly cloudy
+"1003,""Partly cloudy"",""Partly cloudy"",116";;;;;;;;;;sunny;Sunny;Sunny
+1006,Cloudy,Cloudy,119;;;;;;;;;;cloudy;Cloudy;cloudy
+1009,Overcast,Overcast,122;;;;;;;;;;overcast;Overcast;overcast
+1030,Mist,Mist,143;;;;;;;;;;;;
+"1063,""Patchy rain possible"",""Patchy rain possible"",176";;;;;;;;;;blizzard;Blizzard;blizzard
+"1066,""Patchy snow possible"",""Patchy snow possible"",179";;;;;;;;;;;Blowing snow;
+"1069,""Patchy sleet possible"",""Patchy sleet possible"",182";;;;;;;;;;;;
+"1072,""Patchy freezing drizzle possible"",""Patchy freezing drizzle possible"",185";;;;;;;;;;;;
+"1087,""Thundery outbreaks possible"",""Thundery outbreaks possible"",200";;;;;;;;;;drizzle;Light drizzle;drizzle
+"1114,""Blowing snow"",""Blowing snow"",227";;;;;;;;;;;Patchy light drizzle;
+1117,Blizzard,Blizzard,230;;;;;;;;;;;Freezing drizzle;
+1135,Fog,Fog,248;;;;;;;;;;;Heavy freezing drizzle;
+"1147,""Freezing fog"",""Freezing fog"",260";;;;;;;;;;;Patchy freezing drizzle possible;
+"1150,""Patchy light drizzle"",""Patchy light drizzle"",263";;;;;;;;;;;;
+"1153,""Light drizzle"",""Light drizzle"",266";;;;;;;;;;rain;Patchy rain possible;rain
+"1168,""Freezing drizzle"",""Freezing drizzle"",281";;;;;;;;;;;Patchy light rain;
+"1171,""Heavy freezing drizzle"",""Heavy freezing drizzle"",284";;;;;;;;;;;Light rain;
+"1180,""Patchy light rain"",""Patchy light rain"",293";;;;;;;;;;;Moderate rain at times;
+"1183,""Light rain"",""Light rain"",296";;;;;;;;;;;Moderate rain;
+"1186,""Moderate rain at times"",""Moderate rain at times"",299";;;;;;;;;;;Heavy rain at times;
+"1189,""Moderate rain"",""Moderate rain"",302";;;;;;;;;;;Heavy rain;
+"1192,""Heavy rain at times"",""Heavy rain at times"",305";;;;;;;;;;;Light freezing rain;
+"1195,""Heavy rain"",""Heavy rain"",308";;;;;;;;;;;Moderate or heavy freezing rain;
+"1198,""Light freezing rain"",""Light freezing rain"",311";;;;;;;;;;;Light rain shower;
+"1201,""Moderate or heavy freezing rain"",""Moderate or heavy freezing rain"",314";;;;;;;;;;;Moderate or heavy rain shower;
+"1204,""Light sleet"",""Light sleet"",317";;;;;;;;;;;Torrential rain shower;
+"1207,""Moderate or heavy sleet"",""Moderate or heavy sleet"",320";;;;;;;;;;;;
+"1210,""Patchy light snow"",""Patchy light snow"",323";;;;;;;;;;mist;Mist;mist || fog
+"1213,""Light snow"",""Light snow"",326";;;;;;;;;;;Fog;
+"1216,""Patchy moderate snow"",""Patchy moderate snow"",329";;;;;;;;;;;Freezing fog;
+"1219,""Moderate snow"",""Moderate snow"",332";;;;;;;;;;;;
+"1222,""Patchy heavy snow"",""Patchy heavy snow"",335";;;;;;;;;;;;
+"1225,""Heavy snow"",""Heavy snow"",338";;;;;;;;;;;;
+"1237,""Ice pellets"",""Ice pellets"",350";;;;;;;;;;snow;Patchy snow possible;snow || sleet
+"1240,""Light rain shower"",""Light rain shower"",353";;;;;;;;;;;Patchy sleet possible;
+"1243,""Moderate or heavy rain shower"",""Moderate or heavy rain shower"",356";;;;;;;;;;;Light sleet;
+"1246,""Torrential rain shower"",""Torrential rain shower"",359";;;;;;;;;;;Moderate or heavy sleet;
+"1249,""Light sleet showers"",""Light sleet showers"",362";;;;;;;;;;;Patchy light snow;
+"1252,""Moderate or heavy sleet showers"",""Moderate or heavy sleet showers"",365";;;;;;;;;;;Light snow;
+"1255,""Light snow showers"",""Light snow showers"",368";;;;;;;;;;;Patchy moderate snow;
+"1258,""Moderate or heavy snow showers"",""Moderate or heavy snow showers"",371";;;;;;;;;;;Moderate snow;
+"1261,""Light showers of ice pellets"",""Light showers of ice pellets"",374";;;;;;;;;;;Patchy heavy snow;
+"1264,""Moderate or heavy showers of ice pellets"",""Moderate or heavy showers of ice pellets"",377";;;;;;;;;;;Heavy snow;
+"1273,""Patchy light rain with thunder"",""Patchy light rain with thunder"",386";;;;;;;;;;;Light sleet showers;
+"1276,""Moderate or heavy rain with thunder"",""Moderate or heavy rain with thunder"",389";;;;;;;;;;;Moderate or heavy sleet showers;
+"1279,""Patchy light snow with thunder"",""Patchy light snow with thunder"",392";;;;;;;;;;;Light snow showers;
+"1282,""Moderate or heavy snow with thunder"",""Moderate or heavy snow with thunder"",395";;;;;;;;;;;Moderate or heavy snow showers;
+;;;;;;;;;;;;
+;;;;;;;;;;thunder;Thundery outbreaks possiblezle possible;thunder
+;;;;;;;;;;;Patchy light rain with thunder;
+;;;;;;;;;;;Moderate or heavy rain with thunder;
+;;;;;;;;;;;Patchy light snow with thunder;
+;;;;;;;;;;;Moderate or heavy snow with thunder;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;;;
+;;;;;;;;;;icePellets;Ice pellets;pellets
+;;;;;;;;;;;Light showers of ice pellets;
+;;;;;;;;;;;Moderate or heavy showers of ice pellets;
