@@ -13,8 +13,6 @@ interface Images {
 	thunder: any; 	
 }
 
-// const blizzard: require('../assets/blizzard.jpg'),
-
 class imageService {
 	images: Images = {
 		blizzard: require('../assets/blizzard.jpg'), 
@@ -44,15 +42,17 @@ class imageService {
 			return this.images.blizzard
 		} else if (lowWeatherType.includes('drizzle')) {
 			return this.images.drizzle
+		} else if ((lowWeatherType.includes('thunder') && lowWeatherType.includes('rain')) ||
+			(lowWeatherType.includes('thunder') && lowWeatherType.includes('snow')) ||
+			lowWeatherType.includes('thundery')) {
+			return this.images.thunder
 		} else if (lowWeatherType.includes('rain')) {
 			return this.images.rain
 		} else if (lowWeatherType === 'mist' || lowWeatherType.includes('fog')) {
 			return this.images.mist
 		} else if (lowWeatherType.includes('sleet') || lowWeatherType.includes('snow')) {
-			return this.images.mist
-		} else if (lowWeatherType.includes('thunder') || lowWeatherType.includes('snow')) {
-			return this.images.thunder
-		}
+			return this.images.snow
+		} 
 	}
 }
 

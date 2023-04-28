@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import { alpha, } from '@material-ui/core/styles';
 import { makeStyles } from '@mui/styles';
 import WeatherService from '../services/weatherService';
@@ -6,7 +6,7 @@ import { setLocation } from '../store/reducers/userSlice';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { setDailyForecast, setHourlyForecast, setError} from '../store/reducers/weatherSlice';
-import { InputBase, Button } from '@material-ui/core';
+import { InputBase, Button, CircularProgress } from '@material-ui/core';
 
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -53,18 +53,19 @@ const useStyles = makeStyles({
 
 const SearchPanel: FC = () => {
 	const classes = useStyles();
-	const { city } = useAppSelector(state => state.user.location);
-	// const {isError} = useAppSelector(state => state.weather.error);
-	const dispatch = useAppDispatch()
 	const { setForecasts } = WeatherService
+	const dispatch = useAppDispatch()
+	const [newCity, setNewCity] = useState<null | string>(null) 	
+	const { city } = useAppSelector(state => state.user.location);
 	
-	const [newCity, setNewCity] = useState<null | string>(null) 
-	
+	if (!city) return <CircularProgress color="inherit" />	
+
 	const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		newCity && newCity !== city &&
-			setForecasts(newCity, dispatch, setDailyForecast, setHourlyForecast, setLocation, setError)		
-	}	
+			setForecasts(newCity, dispatch, setDailyForecast, setHourlyForecast, setLocation, setError)
+	}
+	
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {	
 		setNewCity(e.target.value)
 	}	

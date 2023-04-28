@@ -5,7 +5,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import WeatherService from '../../services/weatherService';
 import { setLocation } from '../../store/reducers/userSlice';
-import { SwitchButtons } from '../ToggleButtons';
+import { ToggleButtons } from '../ToggleButtons';
 import { setDailyForecast, setHourlyForecast,setError } from '../../store/reducers/weatherSlice';
 import {AppBar, Toolbar, Typography, Stack } from '@material-ui/core';
 import { SearchPanel } from '../SearchPanel';
@@ -30,12 +30,13 @@ const Header: FC = () => {
   const {menuStyle} = useStyles();
   const coords = useCoordinates()
   const { setForecasts } = WeatherService
-  const {city, country, lat, long, dateTime} = useAppSelector(state => state.user.location);
+  const { city, country, lat, long, dateTime } = useAppSelector(state => state.user.location);
+  
   const dispatch = useAppDispatch()
 
   const currentDate = new Date().toISOString().slice(0,10) 
   useEffect(() => {
-    console.log(coords);    
+    // console.log(coords); 
     ((!city && !country && !lat && !long && !dateTime) ||
       (dateTime && currentDate !== dateTime.slice(0, 10))) &&
       coords &&
@@ -54,7 +55,7 @@ const Header: FC = () => {
           </Typography>
           <SearchPanel />
         </Stack>
-         <SwitchButtons />
+         <ToggleButtons />
       </Toolbar>        
     </AppBar>
 	);

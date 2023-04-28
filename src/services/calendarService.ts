@@ -18,7 +18,7 @@ interface RespErr {
 	correlation_id: string
 }
 
-const config = {
+export const config = {
 	clientId: "626710636251-5g916rvn2vnipsj7qntqjqdmvuc6hojd.apps.googleusercontent.com",
 	apiKey: "AIzaSyA-qC9VwOtm23UMoHHDKZ3zy5hE2X7FoSg",
 	scope: "https://www.googleapis.com/auth/calendar.readonly",
@@ -26,7 +26,6 @@ const config = {
 	  "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest",
 	],
 };
-
 class CalendarService extends ApiCalendar {
 	
 	listUpcomingEvents = async () : Promise<gapi.client.calendar.Event[] | undefined> => {
@@ -43,7 +42,7 @@ class CalendarService extends ApiCalendar {
 			response = await gapi.client.calendar.events.list(request);
 			return response.result.items;
 		} catch (err) {
-		  console.log(err);				  
+		  console.error(err);				  
 		  return;
 		}		
 	  }
@@ -55,14 +54,11 @@ class CalendarService extends ApiCalendar {
 		setSnackOpen: (arg: boolean) => Action
 	) => {
 		
-	if (gapi && this.tokenClient) {
-			// export function getToken(): GoogleApiOAuth2TokenObject;			
-			// export function setToken(token: TokenObject|null): void;
+		if (gapi && this.tokenClient) {
 		this.tokenClient.callback = async (resp: RespErr | RespOk) => {
 				if ('error' in resp && resp.error !== undefined) {
 					throw (resp);
 				}
-				console.log(resp);
 			const events = await this.listUpcomingEvents();
 			if (events && (events.length !== 0) && events[0]) {
 				const eventList = events.map(({ summary, start }
@@ -76,19 +72,19 @@ class CalendarService extends ApiCalendar {
 					} return undefined
 				})
 				eventList && dispatch(setEvents(eventList))
-				dispatch(signIn())
-				dispatch(setSnackOpen(true))
 			}
+			dispatch(signIn())
+			dispatch(setSnackOpen(true))
 		};  
 		
 		if (gapi.client.getToken() === null) {
 		 this.tokenClient.requestAccessToken({ prompt: 'consent' });			  
 		} else {
+
 		 this.tokenClient.requestAccessToken({ prompt: '' });
 		}
-  } else {
-    console.error("Error: this.gapi not loaded");
-    new Error("Error: this.gapi not loaded");
+	} else {
+		console.error("Error: this.gapi not loaded");
   }
 	}	
 }

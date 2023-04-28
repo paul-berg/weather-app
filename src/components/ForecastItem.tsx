@@ -1,5 +1,4 @@
 import { Forecast } from '../store/reducers/weatherSlice';
-import { RootState } from '../store/store';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { makeStyles } from '@mui/styles';
 import {Card, CardHeader, CardMedia, CardContent, Typography } from '@material-ui/core';
@@ -30,12 +29,11 @@ const ForecastItem = ({ date, time, temp, icon, text }: Forecast) => {
 		<li className={liStyle}>
 			<Card classes={{root: cardStyle}}>
 				<CardHeader title={dateTime}/>
-				<CardMedia
-					
+				<CardMedia					
       	  component="img"
 					width="80%"					
       	  image={icon}
-      	  alt="weather icon"
+      	  alt={text}
       	/>
 				<CardContent>
 					<Typography variant='h6'>

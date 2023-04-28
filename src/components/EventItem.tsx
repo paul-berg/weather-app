@@ -1,4 +1,4 @@
-import { FC } from "react";
+import React from "react";
 import { UserEvent } from "../store/reducers/userSlice";
 import { Typography, Container, Divider } from "@material-ui/core";
 import { makeStyles } from '@mui/styles';
@@ -8,10 +8,6 @@ const useStyles = makeStyles({
 	containerStyle: {
 		'&.MuiContainer-root': {
 			padding: '0.2rem 0 0',
-			// backgroundRepeat: 'no-repeat',
-			// backgroundSize: 'cover',
-			// position: 'relative',
-			// maxWidth: '1600px',
 		}
 	},
 	dividerStyle: {
@@ -43,7 +39,8 @@ const useStyles = makeStyles({
 })
 
 const EventItem = ({ time, summary }: UserEvent) => {
-	const {timeStyle, summaryStyle, containerStyle, dividerStyle} = useStyles()
+	const { timeStyle, summaryStyle, containerStyle, dividerStyle } = useStyles()
+	if (!time || !summary) return null
 	return (
 		<>
 			<Container

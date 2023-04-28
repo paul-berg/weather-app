@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC} from "react";
 import { Alert, Snackbar } from "@material-ui/core";
 import { useAuth } from "../hooks/useAuth";
 import { useAppSelector } from "../hooks/useAppSelector";
@@ -7,9 +7,11 @@ import { setSnackOpen } from '../store/reducers/userSlice';
 
 const Snack: FC = () => {
 	const dispatch = useAppDispatch()
-	const isSnackOpen = useAppSelector(state => state.user.isSnackOpen);
-	// console.log(isSnackOpen);
 	const isAuth = useAuth()
+	const isSnackOpen = useAppSelector(state => state.user.isSnackOpen);
+
+	if (!isSnackOpen) return null
+	
 	const endMessage: string = isAuth ? 'in' : 'out'
 
 	const handleClose = () => {

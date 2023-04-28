@@ -1,32 +1,22 @@
-import React, { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import { useAppSelector } from '../hooks/useAppSelector';
-import { RootState } from '../store/store';
 import { ForecastItem } from './ForecastItem';
-import { Forecast, setDailyForecast } from '../store/reducers/weatherSlice';
-import { alpha } from '@mui/material';
+import { Forecast} from '../store/reducers/weatherSlice';
 import { Stack } from '@material-ui/core';
-// import { setDailyForecast } from '../store/weatherSlice';
 import { makeStyles } from '@mui/styles';
 
 
 const useStyles = makeStyles({
-	ul: {
+	ulStyle: {
 		backgroundColor: 'rgba(25,118,210,0.6)',
 		margin: '0',
 		padding: '1rem 1.5rem'
-	},
-	grouped: {
-		"&.MuiButton-contained": {
-			background: 'white',
-			color: "#1976d2",
-		},
-
 	},
 })
 
 
 const ForecastList: FC = () => {
-	const {ul} = useStyles()
+	const {ulStyle} = useStyles()
 
 	const dailyForecast = useAppSelector(state => state.weather.dailyForecast)
 	const hourlyForecast = useAppSelector(state => state.weather.hourlyForecast)
@@ -34,11 +24,11 @@ const ForecastList: FC = () => {
 	const forecast = isDailyForecast ? dailyForecast : hourlyForecast.slice(1)		
 
 	return (		
-		<ul className={ul}>
+		<ul className={ulStyle}>
 			<Stack direction="row"
 				justifyContent="space-around"
 				alignItems="center">
-			{forecast && forecast.map(item => {
+			{forecast && forecast.map((item: Forecast) => {
 				return (
 					<ForecastItem key={`${item.date}${item.time}`} {...item} />
 				)

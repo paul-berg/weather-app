@@ -2,7 +2,6 @@ import { FC } from 'react';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { setError } from '../store/reducers/weatherSlice';
-import { RootState } from '../store/store';
 import { Button, Typography, Container } from '@material-ui/core';
 import { makeStyles } from '@mui/styles';
 
@@ -30,10 +29,11 @@ const useStyles = makeStyles({
 })
 
 const ErrorIndicator: FC = () => {
-	const {containerStyle, attractorStyle, infoStyle} = useStyles()
-	// const events = useSelector((state: RootState) => state.user.events);
-	const { msg: message } = useAppSelector(state => state.weather.error)
+	const { containerStyle, attractorStyle, infoStyle } = useStyles()
 	const dispatch = useAppDispatch()
+	const { isError, msg: message } = useAppSelector(state => state.weather.error)
+	if (!isError) return null
+
 	return (
 		<Container classes={{root: containerStyle}}>
 			<Typography variant="h1"
@@ -42,9 +42,10 @@ const ErrorIndicator: FC = () => {
 				Oops!
 			</Typography>
 			<Typography variant="h5"
+				data-testid="message"
 				classes={{ root: infoStyle }}
 			>
-				{message} That's all we know.
+				{message}. That is all we know.
 			</Typography>
 			<Button
 				variant="contained"

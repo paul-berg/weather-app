@@ -5,10 +5,9 @@ import { switchForecastType } from '../store/reducers/weatherSlice';
 import { useAppSelector } from '../hooks/useAppSelector';
 import { useAppDispatch } from '../hooks/useAppDispatch';
 
-
 const useStyles = makeStyles({
 
-	b: {
+	buttonStyle: {
 		"&.MuiToggleButton-root": {
 			padding: '0.32rem 0.64rem',
 			background: 'white',
@@ -25,11 +24,13 @@ const useStyles = makeStyles({
 	},
 })
 
+
+
+
 const buttonValues: string[] = ['daily','hourly'] 
 
-const SwitchButtons: FC = () => {	
-	const classes = useStyles();
-
+const ToggleButtons: FC = () => {	
+	const {buttonStyle} = useStyles();
 	const isDailyForecast = useAppSelector(state => state.weather.isDailyForecast)
 	const primaryValue = isDailyForecast ? 'daily' : 'hourly'	
 	const [forecastType, setForecastType] = useState<string>(primaryValue);
@@ -49,7 +50,6 @@ const SwitchButtons: FC = () => {
 			value={forecastType}
 			exclusive
 			onChange={handleChange}
-			// aria-label="Platform"
 		>
 			{buttonValues && buttonValues.map(value => {
 				return (
@@ -57,7 +57,7 @@ const SwitchButtons: FC = () => {
 						key={value}
 						value={value} 
 						disabled={value === forecastType}
-						classes={{ root: classes.b }}
+						classes={{ root: buttonStyle }}
 						children={value}
 					/>
 				)
@@ -66,4 +66,4 @@ const SwitchButtons: FC = () => {
 	)
 }
 
-export {SwitchButtons};
+export {ToggleButtons};

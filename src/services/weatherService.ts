@@ -1,59 +1,8 @@
-// "location": {
-// 	"name": "Berezakartuzskaya",
-// 	"region": "Brestskaya Voblasts'",
-// 	"country": "Belarus",
-// 	"lat": 52.53,
-// 	"lon": 24.99,
-// 	"tz_id": "Europe/Minsk",
-// 	"localtime_epoch": 1679403156,
-// 	"localtime": "2023-03-21 15:52"
-// },
-// "current": {
-// 	"condition": {
-// 		},
-// 	"uv": 2.0
-// },
-// "forecast": {
-// 	"forecastday": [
-// 			{
-// 					"date": "2023-03-21",
-// 					"day": {
-// 							"avgtemp_c": 7.6,
-// 							"totalsnow_cm": 0.0,
-// 							"condition": {
-// 									"text": "Patchy rain possible",
-// 									"icon": "//cdn.weatherapi.com/weather/64x64/day/176.png"
-// 							}
-// 					},
-// 					"astro": {
-// 							"is_moon_up": 0,
-// 							"is_sun_up": 0
-// 					},
-// 					"hour": [
-// 							{
-// 									"time": "2023-03-21 00:00",
-// 									"temp_c": 8.3,
-// 									"condition": {
-// 											"text": "Overcast",
-// 											"icon": "//cdn.weatherapi.com/weather/64x64/night/122.png"
-// 									}
-// 							},
-// 							{
-// 									"time": "2023-03-21 01:00",
-// 									"temp_c": 8.5,
-// 									"condition": {
-// 											"text": "Overcast",
-// 											"icon": "//cdn.weatherapi.com/weather/64x64/night/122.png"
-// 									}
-// 							},
-
 import { Forecast } from "../store/reducers/weatherSlice"
 import { Location } from "../store/reducers/userSlice"
-import { Action, AnyAction, Dispatch } from 'redux';			
+import { Action, Dispatch } from 'redux';			
 import { Err } from "../store/reducers/weatherSlice";
-import type { SetDailyForecast } from "../store/reducers/weatherSlice";
-import type { AppDispatch } from "../store/store";
-import { ActionCreator } from "redux";
+
 
 interface Condition {
 	text: string,
@@ -103,13 +52,6 @@ export interface Response {
 	}
 }
 
-// export interface ErrorResponse {
-// 	error: {
-// 		code: number;
-// 		message: string
-// 	}
-// }
-
 class WeatherService {
 
 	getForecast = async <T>(location: Array<number | undefined> | string)
@@ -121,7 +63,6 @@ class WeatherService {
 		const response = await fetch(`http://api.weatherapi.com/v1/forecast.json?key=6400ced0d29c4968989150304230703&q=${preparedLocation}&days=10&aqi=no&alerts=no`)
 		if (!response.ok) {
 			const err = await response.json()
-			console.log(err.error.message);
 			throw { isError: true, msg: err.error.message }
 		} else {
 			return response.json()
@@ -144,7 +85,7 @@ class WeatherService {
 		}
 	}
 
-	getHourlyForecast = (response: Response | undefined): Array<Forecast> | undefined => {
+	getHourlyForecast = (response: Response | undefined, currentTime: string): Array<Forecast> | undefined => {
 		if (response) {
 			const { forecast } = response
 			const hourlyForecast = forecast.forecastday.slice(0, 2).map(({ date, hour }: ForecastDay) => {
@@ -157,12 +98,7 @@ class WeatherService {
 						text
 					}
 				})			
-			})
-			const now = new Date().getTime() - 3600000
-			const currentTime = Intl.DateTimeFormat('ru-RU', {
-				hour: "numeric",
-				minute: "numeric",
-			}).format(now)
+			})			
 			const timeLeft = hourlyForecast[0].filter(({ time }: any) => time >= (currentTime))
 			return timeLeft.concat(hourlyForecast[1]).splice(0, 7)
 		}
@@ -170,7 +106,7 @@ class WeatherService {
 
 	getLocation = (response: Response | undefined): Location | undefined => {
 		if (response) {
-			const { location: { name, country, lat: lat, lon: long, localtime } } = response
+			const { location: { name, country, lat, lon: long, localtime } } = response
 			return {
 				city: name,
 				country,
@@ -192,7 +128,12 @@ class WeatherService {
 			const response = await this.getForecast<Response>(position)
 			if (response) {
 				const dailyRes = this.getDailyForecast(response)
-				const hourlyRes = this.getHourlyForecast(response)
+				const now = new Date().getTime() - 3600000
+				const currentTime = Intl.DateTimeFormat('ru-RU', {
+					hour: "numeric",
+					minute: "numeric",
+				}).format(now)
+				const hourlyRes = this.getHourlyForecast(response, currentTime)
 				const location = this.getLocation(response)
 				dailyRes && dispatch(setDailyForecast(dailyRes))
 				hourlyRes && dispatch(setHourlyForecast(hourlyRes))

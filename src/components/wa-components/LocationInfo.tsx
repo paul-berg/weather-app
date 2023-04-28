@@ -13,12 +13,12 @@ const useStyles = makeStyles({
 	
 })
 
-
-
 const LocationInfo: FC = () => {
-	const { containerStyle } = useStyles()
+	const { containerStyle } = useStyles()	
+	const { city, country, dateTime } = useAppSelector(state => state.user.location);
 	
-	const { city, country, dateTime } = useAppSelector(state => state.user.location);	
+	if (!city || !country || !dateTime) return null
+
 	const date = new Date(`${dateTime}`)
 	const timeFull = Intl.DateTimeFormat('en-US', {
 		hour: "numeric",
@@ -46,7 +46,6 @@ const LocationInfo: FC = () => {
 			classes={{root: containerStyle}}
 					variant='subtitle1'					
           component='span'
-          // sx={{flexGrow: 1}}
       >
           {dayPart}
 			</Typography>				
@@ -65,6 +64,8 @@ const LocationInfo: FC = () => {
 			</Typography>	
 		</>
 	);
+
+	
 }
 
 export {LocationInfo};
